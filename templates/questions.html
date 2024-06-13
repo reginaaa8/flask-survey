@@ -6,10 +6,10 @@
 
 <h1>{{questions.question}}</h1>
 
-<form action="/response">
+<form action="/response" method="POST">
     {% for choice in questions.choices %}
-    <label for="{{id}}" name="{{id}}">{{choice}}</label>
-    <input id="{{id}}" name="{{id}}" type="radio">
+    <label for="{{id}}" name="response">{{choice}}</label>
+    <input id="{{id}}" name="response" value="{{choice}}" type="radio">
     <br>
     {% endfor %}
     <button>Submit</button>
