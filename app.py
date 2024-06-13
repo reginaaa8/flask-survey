@@ -26,9 +26,9 @@ def start_survey():
 @app.route('/questions/<id>')
 def show_question(id):
     '''show user current question'''
+    id = 0
     if len(RESPONSES) == len(survey.questions):
         return redirect('/completed')
-    id = len(RESPONSES)
     return render_template('questions.html', survey=survey, questions=survey.questions[id], id=id)
 
 @app.route('/response', methods=['POST'])
