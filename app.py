@@ -20,7 +20,7 @@ def index():
 @app.route('/start-survey', methods=['POST'])
 def start_survey():
     '''clear responses from "database" before beginning survey'''
-    RESPONSES = []
+    RESPONSES.clear()
     return redirect(f'/questions/{len(RESPONSES)}')
 
 @app.route('/questions/<id>')
