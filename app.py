@@ -17,9 +17,17 @@ def index():
     '''home page - start survey'''
     return render_template('home.html', survey=survey)
 
+@app.route('/start-survey', methods=['POST'])
+def start_survey():
+    '''clear responses from "database" before beginning survey'''
+    RESPONSES = []
+    return redirect(f'/questions/{len(RESPONSES)}')
+
 @app.route('/questions/<id>')
 def show_question(id):
     '''show user current question'''
+    if len(RESPONSES) == len(survey.questions):
+        return redirect('/completed')
     id = len(RESPONSES)
     return render_template('questions.html', survey=survey, questions=survey.questions[id], id=id)
 
@@ -29,4 +37,8 @@ def handle_response():
     response = request.form['response']
     RESPONSES.append(response)
     return redirect(f'/questions/{len(RESPONSES)}')
+
+@app.route('/completed')
+def complete():
+    return render_template('complete.html', survey=survey)
 
