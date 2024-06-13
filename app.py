@@ -28,6 +28,5 @@ def handle_response():
     '''add user response to RESPONSES (aka my fake db) and redirect to next question'''
     response = request.form['response']
     RESPONSES.append(response)
-    print(RESPONSES)
     return redirect(f'/questions/{len(RESPONSES)}')
 
