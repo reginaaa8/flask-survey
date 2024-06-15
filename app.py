@@ -39,9 +39,14 @@ def show_question(id):
 @app.route('/response', methods=['POST'])
 def handle_response():
     '''add user response to RESPONSES (aka my fake db) and redirect to next question'''
-    response = request.form['response']
-    RESPONSES.append(response)
-    return redirect(f'/questions/{len(RESPONSES)}')
+    if request.form.get('response'): 
+        #if the user answerd the question, add their respones to my "database"
+        response = request.form['response']
+        RESPONSES.append(response)
+        return redirect(f'/questions/{len(RESPONSES)}')
+    else: #if user hit submit button without answering the question
+        flash('Please respond. All questions are required')
+        return redirect(f'/questions/{len(RESPONSES)}')
 
 @app.route('/completed')
 def complete():
